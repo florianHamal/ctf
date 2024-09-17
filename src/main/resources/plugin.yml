@@ -1,0 +1,6 @@
+name: ctf
+version: '${project.version}'
+main: at.flori4n.ctf.Ctf
+commands:
+  ctf:
+    description: -;
