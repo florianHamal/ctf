@@ -35,8 +35,12 @@ public class IngameState implements State {
                 p.setGameMode(GameMode.SURVIVAL);
                 p.teleport(team.getSpawn());
                 p.setBedSpawnLocation(team.getSpawn());
+                equipPlayer(p);
             }
         }
+        //players dont drop items
+        //invs get cleared every respawn
+        gameData.getTeams().get(0).getSpawn().getWorld().setGameRuleValue("keepInventory", "false");
     }
 
     @Override
@@ -64,5 +68,18 @@ public class IngameState implements State {
         System.out.println("stoppingIngameState");
         Bukkit.getScheduler().cancelTask(taskId);
         HandlerList.unregisterAll(ingameListeners);
+    }
+
+    public void equipPlayer(Player p){
+        p.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
+        p.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
+        p.getInventory().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
+        p.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        p.getInventory().addItem(new ItemStack(Material.STONE_SWORD));
+        p.getInventory().addItem(new ItemStack(Material.BOW));
+
+        ItemStack itemStack = new ItemStack(Material.ARROW);
+        itemStack.setAmount(10);
+        p.getInventory().addItem(itemStack);
     }
 }

@@ -5,17 +5,21 @@ import at.flori4n.ctf.data.GameData;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.github.paperspigot.Title;
 import org.spigotmc.event.entity.EntityDismountEvent;
 
@@ -121,4 +125,25 @@ public class IngameListeners implements Listener {
         e.setCancelled(true);
     }
 
+    @EventHandler
+    public void onPlayerRespawn (PlayerRespawnEvent e){
+        Player p = e.getPlayer();
+        CtfTeam team = gameData.getPlayerTeam(p);
+        if (team==null)return;
+        p.getInventory().clear();
+        equipPlayer(p);
+        e.setRespawnLocation(team.getSpawn());
+    }
+    public void equipPlayer(Player p){
+        p.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
+        p.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
+        p.getInventory().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
+        p.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        p.getInventory().addItem(new ItemStack(Material.STONE_SWORD));
+        p.getInventory().addItem(new ItemStack(Material.BOW));
+
+        ItemStack itemStack = new ItemStack(Material.ARROW);
+        itemStack.setAmount(10);
+        p.getInventory().addItem(itemStack);
+    }
 }
