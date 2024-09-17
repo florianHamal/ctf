@@ -7,6 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Team;
 
@@ -59,9 +61,9 @@ public class GameData {
             CtfTeam team = new CtfTeam(
                     teamSection.getName(),
                     teamSection.getInt("size"),
-                    (Location) teamSection.get("spawn")
+                    (Location) teamSection.get("spawn"),
+                    (Location) teamSection.get("flagLocation")
             );
-            System.out.println(team.getSpawn().getX());
             teams.add(team);
         }
 
@@ -97,12 +99,19 @@ public class GameData {
             ConfigurationSection teamSection = section.createSection(team.getName());
             teamSection.set("size",team.getSize());
             teamSection.set("spawn",team.getSpawn());
+            teamSection.set("flagLocation",team.getFlagLocation());
         }
         Ctf.getPlugin().saveConfig();
     }
 
     public void addTeam(CtfTeam team){
         teams.add(team);
+    }
+    public CtfTeam getTeamByFlag(LivingEntity flag){
+        for (CtfTeam t:teams){
+            if (t.getFlag() == flag) return t;
+        }
+        return null;
     }
 
     public CtfTeam getPlayerTeam(Player player){

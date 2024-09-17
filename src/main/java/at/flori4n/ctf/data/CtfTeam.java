@@ -5,6 +5,9 @@ import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Team;
 
@@ -20,13 +23,31 @@ public class CtfTeam {
     @Getter
     private int size;
 
+    @Getter
+    private ArmorStand flag;
 
-    public CtfTeam(String name,int size,Location spawn){
+    @Getter
+    @Setter
+    private Location flagLocation;
+
+
+    public CtfTeam(String name, int size, Location spawn, Location flagLocation) {
+        this.spawn = spawn;
+        this.size = size;
+        this.flagLocation = flagLocation;
+        setupTeam(name);
+    }
+
+    public CtfTeam(String name, int size, Location spawn){
+        this.size = size;
+        this.spawn = spawn;
+        setupTeam(name);
+    }
+
+    private void setupTeam(String name){
         team = Bukkit.getScoreboardManager().getMainScoreboard().registerNewTeam(name);
         team.setPrefix(name+": ");
         team.setAllowFriendlyFire(false);
-        this.size = size;
-        this.spawn = spawn;
     }
     public void addPlayer(OfflinePlayer player){
         if (team.getSize()<size){
@@ -34,6 +55,11 @@ public class CtfTeam {
         }else {
             throw new RuntimeException("teamIsFull");
         }
+    }
+    public void setFlag(ArmorStand e){
+        flag = e;
+        e.setCustomName(team.getName()+ " Flag");
+        e.setCustomNameVisible(true);
     }
     public void removePlayer(OfflinePlayer player){
         team.removeEntry(player.getName());

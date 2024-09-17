@@ -16,6 +16,7 @@ public class Manager {
         if (instance == null)instance=new Manager();
         return instance;
     }
+
     private Manager(){}
 
 }

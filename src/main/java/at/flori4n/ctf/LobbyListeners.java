@@ -19,7 +19,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class LobbyListeners implements Listener {
     private int taskId;
-    private boolean taskRunning = false;
     private GameData gameData = GameData.getInstance();
     private LobbyState lobbyState;
 
@@ -41,11 +40,10 @@ public class LobbyListeners implements Listener {
         teamSelector.setItemMeta(teamSelectorMeta);
         p.getInventory().addItem(teamSelector);
 
-        if (!taskRunning&&Bukkit.getOnlinePlayers().size()>=gameData.getPlayersToStart()){
+        if (!lobbyState.isTaskRunning()&&Bukkit.getOnlinePlayers().size()>=gameData.getPlayersToStart()){
             lobbyState.startCounter();
-        }else if (taskRunning&&Bukkit.getOnlinePlayers().size()<gameData.getPlayersToStart()){
-            lobbyState.stopCounter();
         }
+        Bukkit.broadcastMessage(Bukkit.getOnlinePlayers().size() +"/"+gameData.getPlayersToStart() + " Spieler");
 
     }
     @EventHandler
@@ -53,6 +51,10 @@ public class LobbyListeners implements Listener {
         Player p = event.getPlayer();
         CtfTeam t = gameData.getPlayerTeam(p);
         if (t!=null) t.removePlayer(p);
+        if (lobbyState.isTaskRunning()&&Bukkit.getOnlinePlayers().size()-1<gameData.getPlayersToStart()){
+            lobbyState.stopCounter();
+        }
+        Bukkit.broadcastMessage(Bukkit.getOnlinePlayers().size()-1 +"/"+gameData.getPlayersToStart() + " Spieler");
     }
 
     @EventHandler
@@ -77,6 +79,9 @@ public class LobbyListeners implements Listener {
     @EventHandler
     public void playerJoin(PlayerJoinEvent e){
         Player p = e.getPlayer();
+        p.setGameMode(GameMode.SURVIVAL);
+        p.teleport(gameData.getLobbyLocation());
+        p.setBedSpawnLocation(gameData.getLobbyLocation());
     }
     @EventHandler
     public void onServerPing(ServerListPingEvent e){

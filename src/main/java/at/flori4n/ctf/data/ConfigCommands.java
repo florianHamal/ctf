@@ -2,6 +2,8 @@ package at.flori4n.ctf.data;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 public class ConfigCommands implements CommandExecutor {
     GameData gameData = GameData.getInstance();
@@ -22,9 +24,14 @@ public class ConfigCommands implements CommandExecutor {
                                 player.getLocation()
                         )
                 );
+                player.sendMessage("config saved");
+                break;
+            case "setFlagLocation":
+                gameData.getTeamByName(strings[1]).setFlagLocation(player.getLocation());
                 break;
             case "printTeams":
                 gameData.printTeams(player);
+                break;
             case "save":
                 gameData.saveConfig();
                 player.sendMessage("config saved");

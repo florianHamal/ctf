@@ -1,5 +1,6 @@
 package at.flori4n.ctf;
 
+import at.flori4n.ctf.data.CtfTeam;
 import at.flori4n.ctf.data.GameData;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -7,11 +8,14 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
+import java.util.Iterator;
+
 public class LobbyState implements State {
 
     private final LobbyListeners lobbyListeners = new LobbyListeners(this);
     private final GuiListeners guiListeners = new GuiListeners();
     private int taskId;
+    private GameData gameData = GameData.getInstance();
     @Getter
     private boolean taskRunning = false;
 
@@ -34,6 +38,30 @@ public class LobbyState implements State {
         HandlerList.unregisterAll(lobbyListeners);
         HandlerList.unregisterAll(guiListeners);
         stopCounter();
+        putPlayersInTeams();
+    }
+    public void putPlayersInTeams(){
+        Iterator<CtfTeam> teamsIterator = gameData.getTeams().iterator();
+        Iterator<? extends Player> playerIterator = Bukkit.getOnlinePlayers().iterator();
+        CtfTeam team = teamsIterator.next();
+        Player player = playerIterator.next();
+        while (true){
+            System.out.println(team.getName());
+            System.out.println(teamsIterator.hasNext());
+            System.out.println(player.getDisplayName());
+            System.out.println(playerIterator.hasNext());
+            try {
+                team.addPlayer(player);
+                if (!playerIterator.hasNext())return;
+                player = playerIterator.next();
+                System.out.println("test");
+            }catch (RuntimeException e){
+                System.out.println("tes2");
+                if (!teamsIterator.hasNext())return;
+                System.out.println("tes3");
+                team = teamsIterator.next();
+            }
+        }
     }
 
     public void startCounter(){
@@ -66,6 +94,8 @@ public class LobbyState implements State {
     }
 
     public void stopCounter(){
+        Bukkit.broadcastMessage("Start abgebrochen");
+        Bukkit.broadcastMessage("Zu wenig Spieler");
         Bukkit.getScheduler().cancelTask(taskId);
         taskRunning = false;
     }
