@@ -35,7 +35,7 @@ public class IngameListeners implements Listener {
         if (!(e.getDamager() instanceof Player))return;
         Player player = (Player) e.getDamager();
         Entity entity = e.getEntity();
-        if (entity.getType() != EntityType.ARMOR_STAND)return;
+        if (!entity.hasMetadata("flori4n.ctf.flag"))return;
         e.setCancelled(true);
         CtfTeam flagTeam = gameData.getTeamByFlag((LivingEntity) entity);
         CtfTeam playerTeam = gameData.getPlayerTeam((Player) player);
@@ -49,7 +49,7 @@ public class IngameListeners implements Listener {
         }else {
             ArmorStand armorStand = (ArmorStand) e.getEntity();
             armorStand.setMarker(true);
-            armorStand.setCustomNameVisible(false);
+            //armorStand.setCustomNameVisible(false);
             e.getDamager().setPassenger(armorStand);
             Bukkit.getOnlinePlayers().forEach(p ->
                     p.sendTitle(new Title(player.getName(),"§4hat die Fahne von "+flagTeam.getName() +"§4 gestohlem",1*20,1*20,1*20)));
@@ -60,17 +60,18 @@ public class IngameListeners implements Listener {
     @EventHandler
     public void onPLayerDeath(PlayerDeathEvent e){
         ArmorStand flag = (ArmorStand) e.getEntity().getPassenger();
-        if (flag==null||flag.getType()!=EntityType.ARMOR_STAND)return;
+        if (flag==null)return;
+        if (!flag.hasMetadata("flori4n.ctf.flag"))return;
         CtfTeam ctfTeam = gameData.getTeamByFlag(flag);
         if (ctfTeam==null)return;
         flag.setMarker(false);
-        flag.setCustomNameVisible(true);
+        //flag.setCustomNameVisible(true);
     }
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e){
         Player player = e.getPlayer();
         LivingEntity flag = (LivingEntity) player.getPassenger();
-        if (flag==null||flag.getType()!=EntityType.ARMOR_STAND)return;
+        if (flag==null||!flag.hasMetadata("flori4n.ctf.flag"))return;
         CtfTeam team = gameData.getPlayerTeam(player);
         if (team==null)return;
         if (isInSpawn(player.getLocation(),team.getSpawn())) Manager.getInstance().setState(new GameOverState(team));
@@ -88,7 +89,7 @@ public class IngameListeners implements Listener {
     }
     @EventHandler
     public void onPlayerInteract(PlayerInteractAtEntityEvent e){
-        if (e.getRightClicked().getType()==EntityType.ARMOR_STAND)e.setCancelled(true);
+        if (e.getRightClicked().hasMetadata("flori4n.ctf.flag"))e.setCancelled(true);
     }
 
     @EventHandler
@@ -130,8 +131,8 @@ public class IngameListeners implements Listener {
         Player p = e.getPlayer();
         CtfTeam team = gameData.getPlayerTeam(p);
         if (team==null)return;
-        p.getInventory().clear();
-        equipPlayer(p);
+        //p.getInventory().clear();
+        //equipPlayer(p);
         e.setRespawnLocation(team.getSpawn());
     }
     public void equipPlayer(Player p){

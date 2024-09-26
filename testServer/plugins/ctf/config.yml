@@ -1,0 +1,48 @@
+start: true
+lobby:
+  ==: org.bukkit.Location
+  world: world
+  x: 173.62208464143882
+  y: 44.0
+  z: -1254.5617814315922
+  pitch: 41.51441
+  yaw: 174.65466
+lobbyTime: 5
+playersToStart: 2
+teams:
+  blue:
+    size: 1
+    spawn:
+      ==: org.bukkit.Location
+      world: world
+      x: 217.26129486476694
+      y: 23.0
+      z: -1301.2893101278257
+      pitch: 45.859142
+      yaw: 34.332916
+    flagLocation:
+      ==: org.bukkit.Location
+      world: world
+      x: 219.69999998807907
+      y: 24.5
+      z: -1303.699999988079
+      pitch: 52.376244
+      yaw: 213.91333
+  green:
+    size: 1
+    spawn:
+      ==: org.bukkit.Location
+      world: world
+      x: 125.73917682517799
+      y: 23.0
+      z: -1209.792623992214
+      pitch: 48.81597
+      yaw: 216.393
+    flagLocation:
+      ==: org.bukkit.Location
+      world: world
+      x: 123.30000001192093
+      y: 24.5
+      z: -1207.300000011921
+      pitch: 49.117672
+      yaw: 229.2467

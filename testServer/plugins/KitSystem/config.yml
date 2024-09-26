@@ -1,0 +1,142 @@
+kits:
+  Tank:
+    locations:
+    - ==: org.bukkit.Location
+      world: world
+      x: 121.41767929695067
+      y: 23.5
+      z: -1210.5575044044479
+      pitch: 19.247816
+      yaw: 270.30267
+    - ==: org.bukkit.Location
+      world: world
+      x: 216.51509230000102
+      y: 23.5
+      z: -1305.5424237417092
+      pitch: 0.42087263
+      yaw: 7.213135
+    items:
+      item0:
+        ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_SWORD
+      item1: '-'
+      item2: '-'
+      item3: '-'
+      item4: '-'
+      item5: '-'
+      item6: '-'
+      item7: '-'
+      item8: '_'
+      item9: '-'
+      item10: '-'
+      item11: '-'
+      item12: '-'
+      item13: '-'
+      item14: '-'
+      item15: '-'
+      item16: '-'
+      item17: '-'
+      item18: '-'
+      item19: '-'
+      item20: '-'
+      item21: '-'
+      item22: '-'
+      item23: '-'
+      item24: '-'
+      item25: '-'
+      item26: '-'
+      item27: '-'
+      item28: '-'
+      item29: '-'
+      item30: '-'
+      item31: '-'
+      item32: '-'
+      item33: '-'
+      item34: '-'
+      item35: '-'
+    armor:
+      armor0:
+        ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_BOOTS
+      armor1:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_LEGGINGS
+      armor2:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_CHESTPLATE
+      armor3:
+        ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_HELMET
+  hunter:
+    locations:
+    - ==: org.bukkit.Location
+      world: world
+      x: 126.4350233230145
+      y: 23.5
+      z: -1205.6593611568617
+      pitch: 44.893692
+      yaw: 181.37
+    - ==: org.bukkit.Location
+      world: world
+      x: 221.36157115295657
+      y: 23.5
+      z: -1300.5227865696168
+      pitch: 33.73027
+      yaw: 91.61066
+    items:
+      item0:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_SWORD
+      item1:
+        ==: org.bukkit.inventory.ItemStack
+        type: BOW
+      item2:
+        ==: org.bukkit.inventory.ItemStack
+        type: ARROW
+        amount: 16
+      item3: '-'
+      item4: '-'
+      item5: '-'
+      item6: '-'
+      item7: '-'
+      item8: '-'
+      item9: '-'
+      item10: '-'
+      item11: '-'
+      item12: '-'
+      item13: '-'
+      item14: '-'
+      item15: '-'
+      item16: '-'
+      item17: '-'
+      item18: '-'
+      item19: '-'
+      item20: '-'
+      item21: '-'
+      item22: '-'
+      item23: '-'
+      item24: '-'
+      item25: '-'
+      item26: '-'
+      item27: '-'
+      item28: '-'
+      item29: '-'
+      item30: '-'
+      item31: '-'
+      item32: '-'
+      item33: '-'
+      item34: '-'
+      item35: '-'
+    armor:
+      armor0:
+        ==: org.bukkit.inventory.ItemStack
+        type: CHAINMAIL_BOOTS
+      armor1:
+        ==: org.bukkit.inventory.ItemStack
+        type: CHAINMAIL_LEGGINGS
+      armor2:
+        ==: org.bukkit.inventory.ItemStack
+        type: CHAINMAIL_CHESTPLATE
+      armor3:
+        ==: org.bukkit.inventory.ItemStack
+        type: CHAINMAIL_HELMET

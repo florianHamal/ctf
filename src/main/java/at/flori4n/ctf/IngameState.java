@@ -7,6 +7,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -30,17 +31,18 @@ public class IngameState implements State {
             ArmorStand flag = (ArmorStand) loc.getWorld().spawnEntity(loc,EntityType.ARMOR_STAND);
             flag.getEquipment().setHelmet(new ItemStack(Material.REDSTONE_BLOCK));
             flag.setVisible(false);
+            flag.setMetadata("flori4n.ctf.flag",new FixedMetadataValue(Ctf.getPlugin(),"flori4n.ctf.flag"));
             team.setFlag(flag);
             for (Player p :team.getPlayers()){
                 p.setGameMode(GameMode.SURVIVAL);
                 p.teleport(team.getSpawn());
                 p.setBedSpawnLocation(team.getSpawn());
-                equipPlayer(p);
+                //equipPlayer(p);
             }
         }
         //players dont drop items
         //invs get cleared every respawn
-        gameData.getTeams().get(0).getSpawn().getWorld().setGameRuleValue("keepInventory", "false");
+        //gameData.getTeams().get(0).getSpawn().getWorld().setGameRuleValue("keepInventory", "true");
     }
 
     @Override

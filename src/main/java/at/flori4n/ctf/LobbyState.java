@@ -46,6 +46,10 @@ public class LobbyState implements State {
         CtfTeam team = teamsIterator.next();
         Player player = playerIterator.next();
         while (true){
+            if (gameData.getPlayerTeam(player) !=null){
+                if (!playerIterator.hasNext())return;
+                player = playerIterator.next();
+            }
             System.out.println(team.getName());
             System.out.println(teamsIterator.hasNext());
             System.out.println(player.getDisplayName());

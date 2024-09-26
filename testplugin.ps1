@@ -1,0 +1,1 @@
+ mvn package ; cp .\target\ctf-1.0.jar .\testServer\plugins\ ; cd .\testServer\ ; java -jar paper-1.8.8-445.jar ; cd ..
