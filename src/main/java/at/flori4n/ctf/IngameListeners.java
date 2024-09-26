@@ -113,7 +113,10 @@ public class IngameListeners implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player p = event.getPlayer();
         CtfTeam t = gameData.getPlayerTeam(p);
-        if (t!=null) t.removePlayer(p);
+        if (t==null) return;
+        t.removePlayer(p);
+        //shutdown if there is no player left
+        if (gameData.getTeams().stream().noneMatch(i-> !(i.getPlayers().isEmpty())))Bukkit.shutdown();
     }
 
     @EventHandler

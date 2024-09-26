@@ -11,7 +11,7 @@ lobbyTime: 5
 playersToStart: 2
 teams:
   blue:
-    size: 1
+    size: 2
     spawn:
       ==: org.bukkit.Location
       world: world
@@ -29,7 +29,7 @@ teams:
       pitch: 52.376244
       yaw: 213.91333
   green:
-    size: 1
+    size: 2
     spawn:
       ==: org.bukkit.Location
       world: world

@@ -50,11 +50,15 @@ public class CtfTeam {
         team.setAllowFriendlyFire(false);
     }
     public void addPlayer(OfflinePlayer player){
-        if (team.getSize()<size){
-            team.addEntry(player.getName());
-        }else {
-            throw new RuntimeException("teamIsFull");
-        }
+        if (isFull())throw new RuntimeException("teamIsFull");
+        team.addEntry(player.getName());
+    }
+    public boolean isFull(){
+
+        System.out.println("->>>>>>>>>>>>>>_>>>>>>>>>>>>");
+        System.out.println(team.getSize() + " " + size);
+        System.out.println((team.getSize() >= size));
+        return (team.getSize() >= size);
     }
     public void setFlag(ArmorStand e){
         flag = e;

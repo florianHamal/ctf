@@ -4,3 +4,5 @@ main: at.flori4n.ctf.Ctf
 commands:
   ctf:
     description: -;
+  start:
+    description: -;

@@ -21,6 +21,7 @@ public class IngameState implements State {
         Bukkit.getPluginManager().registerEvents(ingameListeners, Ctf.getPlugin());
 
 
+
         for (Player player:Bukkit.getOnlinePlayers()){
             player.setGameMode(GameMode.SPECTATOR);
             player.getInventory().clear();
@@ -37,12 +38,8 @@ public class IngameState implements State {
                 p.setGameMode(GameMode.SURVIVAL);
                 p.teleport(team.getSpawn());
                 p.setBedSpawnLocation(team.getSpawn());
-                //equipPlayer(p);
             }
         }
-        //players dont drop items
-        //invs get cleared every respawn
-        //gameData.getTeams().get(0).getSpawn().getWorld().setGameRuleValue("keepInventory", "true");
     }
 
     @Override

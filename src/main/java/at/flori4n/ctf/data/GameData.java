@@ -131,5 +131,8 @@ public class GameData {
         if (instance==null)instance=new GameData();
         return instance;
     }
+    public void removeTeam(CtfTeam team){
+        teams.remove(team);
+    }
 
 }

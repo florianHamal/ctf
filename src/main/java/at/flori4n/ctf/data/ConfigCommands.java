@@ -26,6 +26,8 @@ public class ConfigCommands implements CommandExecutor {
                 );
                 player.sendMessage("config saved");
                 break;
+            case "removeTeam":
+                gameData.removeTeam(gameData.getTeamByName(strings[1]));
             case "setFlagLocation":
                 gameData.getTeamByName(strings[1]).setFlagLocation(player.getLocation());
                 break;

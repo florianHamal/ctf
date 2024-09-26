@@ -7,8 +7,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
+import org.bukkit.scoreboard.Team;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 public class LobbyState implements State {
 
@@ -41,31 +45,33 @@ public class LobbyState implements State {
         putPlayersInTeams();
     }
     public void putPlayersInTeams(){
-        Iterator<CtfTeam> teamsIterator = gameData.getTeams().iterator();
-        Iterator<? extends Player> playerIterator = Bukkit.getOnlinePlayers().iterator();
-        CtfTeam team = teamsIterator.next();
-        Player player = playerIterator.next();
-        while (true){
-            if (gameData.getPlayerTeam(player) !=null){
-                if (!playerIterator.hasNext())return;
-                player = playerIterator.next();
+
+        List<CtfTeam> teams = gameData.getTeams();
+        List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
+        while (!players.isEmpty()&&!teams.isEmpty()) {
+            Player player = players.get(0);
+            CtfTeam team = getLowestTeam(teams);
+            if (team.isFull()) {
+                teams.remove(team);
+                continue;
             }
-            System.out.println(team.getName());
-            System.out.println(teamsIterator.hasNext());
-            System.out.println(player.getDisplayName());
-            System.out.println(playerIterator.hasNext());
-            try {
-                team.addPlayer(player);
-                if (!playerIterator.hasNext())return;
-                player = playerIterator.next();
-                System.out.println("test");
-            }catch (RuntimeException e){
-                System.out.println("tes2");
-                if (!teamsIterator.hasNext())return;
-                System.out.println("tes3");
-                team = teamsIterator.next();
+            if (gameData.getPlayerTeam(player) == null) team.addPlayer(player);
+            players.remove(player);
+        }
+        System.out.println("playerS::");
+        Bukkit.getOnlinePlayers().forEach(player -> {
+            System.out.println(player.getName()+"\n");
+        });
+        System.out.println("playerS::");
+    }
+    public CtfTeam getLowestTeam(List<CtfTeam> teams){
+        CtfTeam lowestTeam = teams.get(0);
+        for (CtfTeam team: teams){
+            if (team.getPlayers().size()<lowestTeam.getPlayers().size()){
+                lowestTeam = team;
             }
         }
+        return lowestTeam;
     }
 
     public void startCounter(){
@@ -98,8 +104,6 @@ public class LobbyState implements State {
     }
 
     public void stopCounter(){
-        Bukkit.broadcastMessage("Start abgebrochen");
-        Bukkit.broadcastMessage("Zu wenig Spieler");
         Bukkit.getScheduler().cancelTask(taskId);
         taskRunning = false;
     }

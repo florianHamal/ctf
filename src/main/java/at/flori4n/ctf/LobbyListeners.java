@@ -53,6 +53,8 @@ public class LobbyListeners implements Listener {
         if (t!=null) t.removePlayer(p);
         if (lobbyState.isTaskRunning()&&Bukkit.getOnlinePlayers().size()-1<gameData.getPlayersToStart()){
             lobbyState.stopCounter();
+            Bukkit.broadcastMessage("Start abgebrochen");
+            Bukkit.broadcastMessage("Zu wenig Spieler");
         }
         Bukkit.broadcastMessage(Bukkit.getOnlinePlayers().size()-1 +"/"+gameData.getPlayersToStart() + " Spieler");
     }
