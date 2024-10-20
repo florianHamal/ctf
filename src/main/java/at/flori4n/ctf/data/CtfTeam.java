@@ -56,7 +56,7 @@ public class CtfTeam {
         team.setAllowFriendlyFire(false);
     }
     public void addPlayer(OfflinePlayer player){
-        if (isFull())throw new RuntimeException("teamIsFull");
+        if (isFull())throw new RuntimeException("teamIstVoll");
         team.addEntry(player.getName());
     }
     public boolean isFull(){
@@ -68,7 +68,7 @@ public class CtfTeam {
     }
     public void setFlag(ArmorStand e){
         flag = e;
-        e.setCustomName(team.getName()+ " Flag");
+        e.setCustomName(team.getName()+ "e Fahne");
         e.setCustomNameVisible(true);
     }
     public void removePlayer(OfflinePlayer player){

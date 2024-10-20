@@ -37,7 +37,7 @@ public class GuiListeners implements Listener {
             ItemStack itemStack = new ItemStack(Material.BED);
             List<String> lore = new ArrayList<>();
             lore.add(team.getPlayers().size()+"/"+team.getSize());
-            lore.add("Members:");
+            lore.add("Mitglieder:");
             for (Player p:team.getPlayers()){
                 lore.add("   "+p.getName());
             }
