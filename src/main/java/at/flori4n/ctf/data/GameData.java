@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.Team;
 
 import java.util.ArrayList;
@@ -62,7 +63,8 @@ public class GameData {
                     teamSection.getName(),
                     teamSection.getInt("size"),
                     (Location) teamSection.get("spawn"),
-                    (Location) teamSection.get("flagLocation")
+                    (Location) teamSection.get("flagLocation"),
+                    teamSection.getItemStack("flagBlock")
             );
             teams.add(team);
         }
@@ -100,6 +102,7 @@ public class GameData {
             teamSection.set("size",team.getSize());
             teamSection.set("spawn",team.getSpawn());
             teamSection.set("flagLocation",team.getFlagLocation());
+            teamSection.set("flagBlock",team.getFlagBlock());
         }
         Ctf.getPlugin().saveConfig();
     }

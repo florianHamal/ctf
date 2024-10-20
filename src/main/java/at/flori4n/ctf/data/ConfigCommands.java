@@ -10,6 +10,7 @@ public class ConfigCommands implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
         Player player = (Player) sender;
+        CtfTeam team;
         if (!player.hasPermission("config"))return false;
         switch (strings[0]){
             case "setStart":
@@ -29,7 +30,9 @@ public class ConfigCommands implements CommandExecutor {
             case "removeTeam":
                 gameData.removeTeam(gameData.getTeamByName(strings[1]));
             case "setFlagLocation":
-                gameData.getTeamByName(strings[1]).setFlagLocation(player.getLocation());
+                team =gameData.getTeamByName(strings[1]);
+                team.setFlagLocation(player.getLocation());
+                team.setFlagBlock(player.getItemInHand());
                 break;
             case "printTeams":
                 gameData.printTeams(player);

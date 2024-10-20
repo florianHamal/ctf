@@ -9,6 +9,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.Team;
 
 import java.util.ArrayList;
@@ -30,11 +31,16 @@ public class CtfTeam {
     @Setter
     private Location flagLocation;
 
+    @Getter
+    @Setter
+    private ItemStack flagBlock;
 
-    public CtfTeam(String name, int size, Location spawn, Location flagLocation) {
+
+    public CtfTeam(String name, int size, Location spawn, Location flagLocation,ItemStack flagBlock) {
         this.spawn = spawn;
         this.size = size;
         this.flagLocation = flagLocation;
+        this.flagBlock = flagBlock;
         setupTeam(name);
     }
 
