@@ -30,7 +30,7 @@ public class IngameState implements State {
         for (CtfTeam team:gameData.getTeams()){
             Location loc = team.getFlagLocation();
             ArmorStand flag = (ArmorStand) loc.getWorld().spawnEntity(loc,EntityType.ARMOR_STAND);
-            flag.getEquipment().setHelmet(new ItemStack(Material.REDSTONE_BLOCK));
+            flag.getEquipment().setHelmet(team.getFlagBlock());
             flag.setVisible(false);
             flag.setMetadata("flori4n.ctf.flag",new FixedMetadataValue(Ctf.getPlugin(),"flori4n.ctf.flag"));
             team.setFlag(flag);

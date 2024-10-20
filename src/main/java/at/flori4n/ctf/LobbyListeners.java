@@ -43,7 +43,7 @@ public class LobbyListeners implements Listener {
         if (!lobbyState.isTaskRunning()&&Bukkit.getOnlinePlayers().size()>=gameData.getPlayersToStart()){
             lobbyState.startCounter();
         }
-        Bukkit.broadcastMessage(Bukkit.getOnlinePlayers().size() +"/"+gameData.getPlayersToStart() + " Spieler");
+        Bukkit.broadcastMessage(Bukkit.getOnlinePlayers().size() +"/"+gameData.getMaxPlayers() + " Spieler");
 
     }
     @EventHandler
@@ -56,7 +56,7 @@ public class LobbyListeners implements Listener {
             Bukkit.broadcastMessage("Start abgebrochen");
             Bukkit.broadcastMessage("Zu wenig Spieler");
         }
-        Bukkit.broadcastMessage(Bukkit.getOnlinePlayers().size()-1 +"/"+gameData.getPlayersToStart() + " Spieler");
+        Bukkit.broadcastMessage(Bukkit.getOnlinePlayers().size()-1 +"/"+gameData.getMaxPlayers() + " Spieler");
     }
 
     @EventHandler

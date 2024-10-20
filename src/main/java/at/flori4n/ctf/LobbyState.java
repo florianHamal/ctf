@@ -46,7 +46,7 @@ public class LobbyState implements State {
     }
     public void putPlayersInTeams(){
 
-        List<CtfTeam> teams = gameData.getTeams();
+        List<CtfTeam> teams = new ArrayList<>(gameData.getTeams());
         List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
         while (!players.isEmpty()&&!teams.isEmpty()) {
             Player player = players.get(0);

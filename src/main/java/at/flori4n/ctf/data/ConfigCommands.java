@@ -25,10 +25,11 @@ public class ConfigCommands implements CommandExecutor {
                                 player.getLocation()
                         )
                 );
-                player.sendMessage("config saved");
+                //player.sendMessage("config saved");
                 break;
             case "removeTeam":
                 gameData.removeTeam(gameData.getTeamByName(strings[1]));
+                break;
             case "setFlagLocation":
                 team =gameData.getTeamByName(strings[1]);
                 team.setFlagLocation(player.getLocation());
@@ -39,19 +40,19 @@ public class ConfigCommands implements CommandExecutor {
                 break;
             case "save":
                 gameData.saveConfig();
-                player.sendMessage("config saved");
+                //player.sendMessage("config saved");
                 break;
             case "setLobby":
                 gameData.setLobbyLocation(player.getLocation());
-                player.sendMessage("value changed");
+                //player.sendMessage("value changed");
                 break;
             case "setLobbyTime":
                 gameData.setLobbyTime(Integer.parseInt(strings[1]));
-                player.sendMessage("value changed");
+                //player.sendMessage("value changed");
                 break;
             case "setPlayersToStart":
                 gameData.setPlayersToStart(Integer.parseInt(strings[1]));
-                player.sendMessage("value changed");
+                //player.sendMessage("value changed");
                 break;
             default:
                 player.sendMessage("Invalid Command");

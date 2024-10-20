@@ -35,12 +35,15 @@ public class GameData {
     @Getter
     @Setter
     private int playersToStart;
+    @Getter
+    private int maxPlayers;
 
 
     private GameData(){
         Bukkit.getScoreboardManager().getMainScoreboard().getTeams().forEach(Team::unregister);
         setDefaultConf();
         loadConf();
+        teams.forEach(team -> maxPlayers+=team.getSize());
     }
 
     private void loadConf(){

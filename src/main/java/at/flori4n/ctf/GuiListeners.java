@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -65,6 +66,7 @@ public class GuiListeners implements Listener {
 
     @EventHandler
     public void handleSelectorGUIClick(InventoryClickEvent event){
+        event.setCancelled(true);
         if (!(event.getWhoClicked()instanceof Player)) return;
         Player player = (Player) event.getWhoClicked();
         if (!event.getInventory().getName().equals(GUI_NAME))return;
@@ -77,8 +79,9 @@ public class GuiListeners implements Listener {
            player.sendMessage(ex.getMessage());
         }
         player.closeInventory();
-        event.setCancelled(true);
-
     }
-
+    @EventHandler
+    public void onPlayerDropItem(PlayerDropItemEvent event){
+        event.setCancelled(true);
+    }
 }
