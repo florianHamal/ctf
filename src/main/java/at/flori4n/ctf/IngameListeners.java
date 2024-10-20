@@ -74,13 +74,13 @@ public class IngameListeners implements Listener {
         if (flag==null||!flag.hasMetadata("flori4n.ctf.flag"))return;
         CtfTeam team = gameData.getPlayerTeam(player);
         if (team==null)return;
-        if (isInSpawn(player.getLocation(),team.getSpawn())) Manager.getInstance().setState(new GameOverState(team));
+        if (isInLocation(player.getLocation(),team.getFlagLocation())) Manager.getInstance().setState(new GameOverState(team));
     }
-    private boolean isInSpawn(Location playerLoc,Location spawnLoc){
+    private boolean isInLocation(Location playerLoc,Location loc){
         int offset = 2;
-        if (playerLoc.getX()>spawnLoc.getX()-offset && playerLoc.getX()<spawnLoc.getX()+offset){
-            if (playerLoc.getY()>spawnLoc.getY()-offset && playerLoc.getY()<spawnLoc.getY()+offset){
-                if (playerLoc.getZ()>spawnLoc.getZ()-offset && playerLoc.getZ()<spawnLoc.getZ()+offset){
+        if (playerLoc.getX()>loc.getX()-offset && playerLoc.getX()<loc.getX()+offset){
+            if (playerLoc.getY()>loc.getY()-offset && playerLoc.getY()<loc.getY()+offset){
+                if (playerLoc.getZ()>loc.getZ()-offset && playerLoc.getZ()<loc.getZ()+offset){
                     return true;
                 }
             }
