@@ -51,6 +51,9 @@ public class CtfTeam {
     }
 
     private void setupTeam(String name){
+        if (Bukkit.getScoreboardManager().getMainScoreboard().getTeam(name) != null) {
+            Bukkit.getScoreboardManager().getMainScoreboard().getTeam(name).unregister();
+        }
         team = Bukkit.getScoreboardManager().getMainScoreboard().registerNewTeam(name);
         team.setPrefix(name+": ");
         team.setAllowFriendlyFire(false);
